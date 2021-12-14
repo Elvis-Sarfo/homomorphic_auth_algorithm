@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .header {
+            width: 100%;
+            height: 67px;
+            background-color: rgb(255, 255, 255);
+            position: fixed;
+            top: 0;
+            box-shadow: 0px 1px 2px 0px rgb(60 64 67 / 30%), 0px 1px 3px 1px rgb(60 64 67 / 15%);
+            z-index: 2020;
+        }
+
+        .header .brand {
+            display: inline-block;
+            height: 100%;
+        }
+
+        .header .nav {
+            height: 100%;
+            float: right;
+            padding-right: 20px;
+        }
+
+        .nav ul li {
+            display: inline;
+            padding: 10px;
+        }
+
+        .content {
+            margin-top: 67px;
+            padding: 20px;
+            height: 100%;
+            background-color: rgb(243, 243, 243);
+
+        }
+
+        textarea,
+        input {
+            border-radius: 5px;
+            font-size: large;
+            padding: 5px;
+            display: inline-block;
+            position: relative;
+            margin-bottom: 20px;
+            border: 1px solid grey;
+        }
+
+        input:focus {
+            border-radius: 10px;
+            border: 1px solid grey;
+        }
+
+        .container {
+            display: flex;
+            margin: 0 0 20px 0;
+            /* width: fit-content; */
+        }
+
+        .input-with-label {
+            width: fit-content;
+        }
+
+        .input-with-label .label {
+            margin: 0 0 3px 0;
+            color: rgb(83, 83, 83);
+            width: fit-content;
+        }
+
+        .row {
+            padding: 20px;
+        }
+
+        .col-6 {
+            width: 50%;
+        }
+
+        .col-12 {
+            width: 100%;
+        }
+
+        .btn {
+            padding: 5px 20px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            text-decoration: none;
+            background: brown;
+            color: white;
+            font-size: 18px;
+            float: right;
+        }
+    </style>
+</head>
+
+<body style="margin: 0;">
+    <div class="header">
+        <a class="brand">HOMOMORPHIC</a>
+        <div class="nav">
+            <ul>
+                <li> <a href="http://">Home</a> </li>
+                <li> <a href="http://">Home</a> </li>
+                <li> <a href="http://">Home</a> </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <div class="container">
+            <div style="width: fit-content;margin: auto;">
+                <div class="input-with-label" style="display: inline-block">
+                    <p class="label">P</p>
+                    <input type="text" name="p" id="p">
+                </div>
+                <div class="input-with-label" style="display: inline-block">
+                    <p class="label">Q</p>
+                    <input type="text" name="q" id="q">
+                </div>
+                <div class="input-with-label" style="display: inline-block">
+                    <p class="label">R</p>
+                    <input type="text" name="r" id="r">
+                </div>
+                <input value="Button" type="button" name="" id="">
+            </div>
+
+        </div>
+
+
+        <div class="container">
+            <div style="width: fit-content;margin: auto;">
+                <div class="input-with-label" style="display: block;">
+                    <p class="label">Message</p>
+                    <textarea id="txtInput" style="width: 800px; margin-bottom: 5px;" name="100" id="1000" rows="2"></textarea>
+                </div>
+                <div class="input-with-label" style="display: block;">
+                    <p class="label">Message in Ascii</p>
+                    <textarea id="txtAscii" style="width: 800px; margin-bottom: 5px;" name="100" id="1000" rows="2"></textarea>
+                </div>
+                <button id="btnAscii" class="btn">Convert to Ascii</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <div style="width: fit-content;margin: auto;">
+                <div class="input-with-label" style="display: block;">
+                    <p class="label">Encrypted Text</p>
+                    <textarea id="txtEncrypted" style="width: 800px; margin-bottom: 5px;" name="100" id="1000" rows="2"></textarea>
+                </div>
+                <div style="float: right;">
+                    <button id="btnEncypt" class="btn">Encryt</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div style="width: fit-content;margin: auto;">
+                <div class="input-with-label" style="display: block;">
+                    <p class="label">Decrypted Text</p>
+                    <textarea id="txtDecrypted" style="width: 800px; margin-bottom: 5px;" name="100" id="1000" rows="2"></textarea>
+                </div>
+                <button id="btnDecypt" class="btn">Decrypt</button>
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+
+    <script src="javascripts/utils.js"></script>
+</body>
+
+</html>
