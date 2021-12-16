@@ -10,8 +10,8 @@ window.onload = (e) => {
 
   // Get the DOM elements
   let txtP = document.getElementById('p');
-  let txtQ = document.getElementById('q');
-  // let txtR = document.getElementById('r');
+  // let txtQ = document.getElementById('q');
+  let txtR = document.getElementById('r');
   let txtInput = document.getElementById('txtInput');
   let btnEncypt = document.getElementById('btnEncypt');
   let tblBody = document.querySelector('table tbody');
@@ -19,14 +19,14 @@ window.onload = (e) => {
 
   // set the input values to the generated values to the elements
   txtP.value = p;
-  txtQ.value = q;
-  // txtR.value = r;
+  // txtQ.value = q;
+  txtR.value = r;
 
   btnEncypt.addEventListener('click', (e) => {
     e.preventDefault();
     let _padding = PADDING.toString();
-    ascii = convertStringtoAsciiString(text + _padding);
-    encryption = encryptAsciiString(ascii.trim(), p, q, r);
+    ascii = convertStringtoAsciiString(text + _padding, _padding);
+    encryption = encryptAsciiString(ascii.trim(), p, r, _padding);
     let _asciiString = decryptToAsciiString(encryption.trim(), p);
     _decryption = convertAsciiToString(_asciiString);
     decryption = _decryption.substring(0, _decryption.length - _padding.length);
