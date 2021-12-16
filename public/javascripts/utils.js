@@ -9,6 +9,7 @@ String.prototype.hashCode = function () {
     return hash;
 };
 
+
 /**
  * Generate a random number
  * @param {int} min The minimum number in the range. The defualt value of this parameter is 0
@@ -24,25 +25,28 @@ function getRandomNumber(min = 1000000000, max = 2000000000) {
  * @param {string} str The string value you want to convert
  * @returns {string} The ASCII string
  */
-function convertStringtoAsciiString(str) {
+function convertStringtoAsciiString(str, _padding) {
+    _str = str.substring(0, str.length - _padding.length);
     let asciiValue = '';
-    for (let i = 0; i < str.length; i++) {
+    for (let i = 0; i < _str.length; i++) {
         if (asciiValue == '') {
-            asciiValue = asciiValue + str.charCodeAt(i);
+            asciiValue = asciiValue + _str.charCodeAt(i);
         } else {
-            asciiValue = asciiValue + " " + str.charCodeAt(i);
+            asciiValue = asciiValue + " " + _str.charCodeAt(i);
         }
     }
+    // let paddingEncript = _padding.hashCode();
     return asciiValue;
 }
 
 function convertAsciiToString(asciiValue) {
     let str = '';
     let asciiArray = asciiValue.split(' ');
+    let padding = asciiArray.pop();
     for (let i = 0; i < asciiArray.length; i++) {
         str = str + String.fromCharCode(parseInt(asciiArray[i]));
     }
-    return str.trim();
+    return str.trim() + padding;
 }
 
 /**
@@ -65,32 +69,36 @@ function convertStringtoAsciiArray(str) {
 function convertAsciiToArray(asciiString) {
     // convert the to ascii string to array
     let arr = asciiString.split(' ');
+    let padding = asciiArray.pop();
     // loop over the array and convert the items to integer
     for (let i = 0; i < arr.length; i++) {
         arr[i] = parseInt(arr[i]);
     }
-    return arr;
+    return arr + padding;
 }
 
 /**
  * encrypt the ASCII string using the homomorphic algorithm
  * @param {String || Array} asciiString The ascii string or array you want to encrypt
  */
-function encryptAsciiString(ascii, p, q, r) {
+function encryptAsciiString(ascii, p, r, _padding) {
     let encryptedString = '';
     let asciiArray = ascii.split(' ');
     for (let i = 0; i < asciiArray.length; i++) {
         // The encryption algoritm itself
         // const encryptedChar = BigInt(parseInt(asciiArray[i])) + BigInt(p) * (BigInt(r) + BigInt(q));
-        const encryptedChar = BigInt(parseInt(asciiArray[i])) + BigInt(p) * BigInt(q);
+        const encryptedChar = BigInt(parseInt(asciiArray[i])) + BigInt(p) * BigInt(r);
         encryptedString = encryptedString + ' ' + encryptedChar;
     }
+    let encryptedPadding = BigInt(parseInt(_padding)) + BigInt(p) * BigInt(r);
+    encryptedString = encryptedString + ' ' + encryptedPadding;
     return encryptedString.trim();
 }
 
 function decryptToAsciiString(ascii, p) {
     let encryptedString = '';
     let asciiArray = ascii.split(' ');
+    // let encryptedPadding = asciiArray.pop();
     for (let i = 0; i < asciiArray.length; i++) {
         // The encryption algoritm itself
         const a = BigInt(asciiArray[i]);
