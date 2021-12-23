@@ -17,7 +17,7 @@ String.prototype.hashCode = function () {
  * @returns {int} The random number
  */
 function getRandomNumber(min = 1000000000, max = 2000000000) {
-    return BigInt(Math.floor(Math.random() * (max - min) + min)) ;
+    return new BigNumber(Math.floor(Math.random() * (max - min) + min)) ;
 }
 
 /**
@@ -84,27 +84,31 @@ function convertAsciiToArray(asciiString) {
 function encryptAsciiString(ascii, p, r, _padding) {
     let encryptedString = '';
     let asciiArray = ascii.split(' ');
+    const bigP = new BigNumber(p);
+    const bigR = new BigNumber(r);
+    const bigPadding = new BigNumber((_padding));
     for (let i = 0; i < asciiArray.length; i++) {
         // The encryption algoritm itself
-        // const encryptedChar = BigInt(parseInt(asciiArray[i])) + BigInt(p) * (BigInt(r) + BigInt(q));
-        const encryptedChar = BigInt(parseInt(asciiArray[i])) + BigInt(p) * BigInt(r);
+        let a = new BigNumber(parseInt(asciiArray[i]));
+
+        const encryptedChar = bigP.multipliedBy(bigR).plus(a);
         encryptedString = encryptedString + ' ' + encryptedChar;
     }
-    let encryptedPadding = BigInt(parseInt(_padding)) + BigInt(p) * BigInt(r);
+    let encryptedPadding = bigP.multipliedBy(bigR).plus(bigPadding);
     encryptedString = encryptedString + ' ' + encryptedPadding;
     return encryptedString.trim();
 }
 
 function decryptToAsciiString(ascii, p) {
-    let encryptedString = '';
+    let decryptedString = '';
     let asciiArray = ascii.split(' ');
     // let encryptedPadding = asciiArray.pop();
     for (let i = 0; i < asciiArray.length; i++) {
         // The encryption algoritm itself
-        const a = BigInt(asciiArray[i]);
-        const bigP = BigInt(p);
-        const encryptedChar = a  % bigP;
-        encryptedString = encryptedString + ' ' + encryptedChar;
+        const a = new BigNumber(asciiArray[i]);
+        const bigP = new BigNumber(p).toString();
+        const encryptedChar = a.modulo(bigP);
+        decryptedString = decryptedString + ' ' + encryptedChar;
     }
-    return encryptedString.trim();
+    return decryptedString.trim();
 }
