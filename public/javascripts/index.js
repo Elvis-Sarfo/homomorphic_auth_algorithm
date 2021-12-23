@@ -34,12 +34,14 @@ window.onload = (e) => {
     console.log(data);
 
     tblBody.innerHTML = tblBody.innerHTML + `<tr><td>${text}</td> <td>${_padding}</td> <td>${encryption}</td><td>${_decryption}</td></tr>`
-
-
   });
 
   txtInput.addEventListener('input', () => {
-    PADDING = txtInput.value.trim().hashCode();
+    PADDING = new BigNumber(txtInput.value.trim().hashCode()).absoluteValue();
+    if (p.isLessThan(PADDING)) {
+      PADDING = p.minus(PADDING).absoluteValue();
+    }
+
     text = txtInput.value.trim();
   });
 };
